@@ -1,22 +1,25 @@
 News Portal
 -----------
 
-This is demo project in symfony 4 framework.
+This is demo projects on Symfony 4 framework.
 
-1.Clone repository
+Installation
+------------
+
+1. Clone repository
 
     ```bash
-    $ git clone https://github.com/vsflash/news_portal news_portal
+    $ git clone https://github.com/greeflas/ITEA-PHP-Adv6_News-Portal news_portal
     $ cd news_portal
     ```
     
-2.Install dependencies
+2. Install dependencies
 
     ```bash
     $ composer install
     ```
     
-3.Run server
+3. Run server
 
     ```bash
     $ symfony serve
