@@ -16,7 +16,7 @@ use App\Exception\EntityNotFoundException;
 use App\Model\Article;
 use Faker\Factory;
 
-final class FakeArticlePresentationService implements ArticlePresentationInterface, ArticleEntityInterface
+final class FakeArticlePresentationService implements ArticlePresentationInterface
 {
     private const CATEGORIES = [
         'World',
@@ -57,7 +57,7 @@ final class FakeArticlePresentationService implements ArticlePresentationInterfa
      *
      * @return Article
      */
-    public static function findOne(int $id): Article
+    public function findOne(int $id): Article
     {
         if ($id > self::ARTICLE_COUNT || $id < 1) {
             throw new EntityNotFoundException('Article does not exist.');

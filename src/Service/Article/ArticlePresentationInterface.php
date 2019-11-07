@@ -12,8 +12,11 @@ declare(strict_types=1);
 namespace App\Service\Article;
 
 use App\Collection\ArticleCollection;
+use App\Model\Article;
 
 interface ArticlePresentationInterface
 {
     public function getLatest(): ArticleCollection;
+
+    public function findOne(int $id): Article;
 }
