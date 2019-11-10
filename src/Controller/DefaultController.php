@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the "News Portal" project.
+ *
+ * (c) Vadim Selyan <vadimselyan@gmail.com>
+ *
+ */
+
 namespace App\Controller;
 
 use App\Service\Article\ArticlePresentationInterface;
