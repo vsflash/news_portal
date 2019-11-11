@@ -25,6 +25,8 @@ final class ArticleRepository extends ServiceEntityRepository implements Article
     public function findLatest(): iterable
     {
         $query = $this->createQueryBuilder('a')
+            ->innerJoin('a.category', 'c')
+            ->addSelect('c')
             ->orderBy('a.publishedAt', 'DESC')
             ->setMaxResults(10)
             ->getQuery();

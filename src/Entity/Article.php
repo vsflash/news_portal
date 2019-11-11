@@ -41,6 +41,11 @@ class Article
      */
     private $publishedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="article")
+     */
+    private $category;
+
     public function __construct(string $title)
     {
         $this->title = $title;
@@ -51,9 +56,16 @@ class Article
         return $this->id;
     }
 
-    public function getCategory()
+    public function getCategory(): ?Category
     {
-        return 'TODO';
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     public function getTitle(): string

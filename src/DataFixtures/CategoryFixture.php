@@ -1,0 +1,30 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\Category;
+use Doctrine\Common\Persistence\ObjectManager;
+
+final class CategoryFixture extends AbstractFixture
+{
+    public const CATEGORIES = [
+        'world' => 'World',
+        'sport' => 'Sport',
+        'it' => 'It',
+        'science' => 'Science',
+    ];
+
+    public function load(ObjectManager $manager)
+    {
+        foreach (self::CATEGORIES as $slug => $title) {
+            $category = new Category($title);
+            $category->setSlug($slug);
+
+            $manager->persist($category);
+
+            $this->addReference($slug, $category);
+        }
+
+        $manager->flush();
+    }
+}
