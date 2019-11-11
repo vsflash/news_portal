@@ -5,7 +5,7 @@ namespace App\Service\Article;
 
 
 use App\Collection\ArticleCollection;
-use App\Model\Article;
+use App\Entity\Article;
 use App\Repository\Article\ArticleRepositoryInterface;
 
 final class ArticlePresentationService implements ArticlePresentationInterface
@@ -28,11 +28,10 @@ final class ArticlePresentationService implements ArticlePresentationInterface
     }
 
     /**
-     * @param int $id
-     * @return Article
+     * {@inheritdoc}
      */
     public function findOne(int $id): Article
     {
-        // TODO: Implement findOne() method.
+        return $this->articleRepository->findOne($id);
     }
 }

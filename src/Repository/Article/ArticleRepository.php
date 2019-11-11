@@ -3,8 +3,11 @@
 namespace App\Repository\Article;
 
 use App\Entity\Article;
+use App\Repository\EnsureFoundTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +17,18 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 final class ArticleRepository extends ServiceEntityRepository implements ArticleRepositoryInterface
 {
+    use EnsureFoundTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    public static function createIsPublishedCriteria(): Criteria
+    {
+        return Criteria::create()->andWhere(
+            Criteria::expr()->neq('a.publishedAt', null)
+        );
     }
 
     /**
@@ -33,5 +45,27 @@ final class ArticleRepository extends ServiceEntityRepository implements Article
 
         return $query->getResult();
 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOne(int $id): Article
+    {
+        $query = $this->createQbWithPublishedCriteria()
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+        ;
+        $article = $query->getOneOrNullResult();
+        $this->ensureFound($article, 'Article');
+        return $article;
+    }
+
+
+    private function createQbWithPublishedCriteria(): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a');
+        return $qb->addCriteria(self::createIsPublishedCriteria());
     }
 }

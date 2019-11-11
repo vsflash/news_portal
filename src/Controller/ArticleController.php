@@ -21,7 +21,7 @@ final class ArticleController extends AbstractController
     public function show(int $id, ArticlePresentationInterface $presentationService): Response
     {
         try {
-            $article = $presentationService::findOne($id);
+            $article = $presentationService->findOne($id);
         } catch (EntityNotFoundException $e) {
             throw new EntityNotFoundException('Article does not exist.');
         }
