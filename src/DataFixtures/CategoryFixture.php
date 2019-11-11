@@ -18,7 +18,6 @@ final class CategoryFixture extends AbstractFixture
     {
         foreach (self::CATEGORIES as $slug => $title) {
             $category = new Category($title);
-            $category->setSlug($slug);
 
             $manager->persist($category);
 
