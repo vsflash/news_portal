@@ -9,7 +9,7 @@
 {% block body %}
     <section class="top-posts">
         <article class="main-post top-post">
-            <a href="#" class="category-link">{{ article.category }}</a>
+            <a href="#" class="category-link">{{ article.category.title }}</a>
             <img src="{{ article.image }}" alt="" class="img-fluid">
             <h1>{{ article.title }}</h1>
             <time>{{ article.publishedAt | date('d-m-Y') }}</time>
