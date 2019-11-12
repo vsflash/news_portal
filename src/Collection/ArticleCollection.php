@@ -1,8 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the "News Portal" project.
+ *
+ * (c) Vadim Selyan <vadimselyan@gmail.com>
+ *
+ */
+
 namespace App\Collection;
 
-use App\Model\Article;
+use App\Entity\Article;
 
 final class ArticleCollection implements \IteratorAggregate
 {
@@ -17,6 +26,7 @@ final class ArticleCollection implements \IteratorAggregate
     public function shift(): Article
     {
         $article = \array_shift($this->articles);
+
         if (null === $article) {
             throw new \RuntimeException('Articles collection is empty');
         }
