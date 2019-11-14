@@ -27,6 +27,13 @@ final class ArticlePresentationService implements ArticlePresentationInterface
         return new ArticleCollection(...$articles);
     }
 
+    public function getLatestByCategoryId(int $id): ArticleCollection
+    {
+        $articles = $this->articleRepository->findLatestByCategoryId($id);
+
+        return new ArticleCollection(...$articles);
+    }
+
     /**
      * {@inheritdoc}
      */

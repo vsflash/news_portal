@@ -47,6 +47,19 @@ final class ArticleRepository extends ServiceEntityRepository implements Article
 
     }
 
+    public function findLatestByCategoryId(int $id)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->innerJoin('a.category', 'c')
+            ->where('')
+            ->addSelect('c')
+            ->orderBy('a.publishedAt', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     /**
      * {@inheritdoc}
      */
